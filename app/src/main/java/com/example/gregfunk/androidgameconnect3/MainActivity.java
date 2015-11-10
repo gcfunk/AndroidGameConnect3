@@ -15,6 +15,8 @@ public class MainActivity extends ActionBarActivity {
     // 0 = player 1, 1 = player 2
     int activePlayer = 0;
 
+    boolean gameIsActive = true;
+
     // 2 = unplayed
     int[] gameState = {2, 2, 2, 2, 2, 2, 2, 2, 2};
 
@@ -40,7 +42,7 @@ public class MainActivity extends ActionBarActivity {
 
         int slot = Integer.parseInt(counter.getTag().toString());
 
-        if (gameState[slot] == 2) {
+        if (gameState[slot] == 2 && gameIsActive) {
             gameState[slot] = activePlayer;
 
             counter.setTranslationY(-1000f);
@@ -63,6 +65,8 @@ public class MainActivity extends ActionBarActivity {
                 }
             }
             if (winner < 2) {
+                gameIsActive = false;
+
                 TextView winnerMessage = (TextView) findViewById(R.id.winnerMessage);
                 winnerMessage.setText("Player " + (winner + 1) + " wins!");
 
@@ -70,6 +74,23 @@ public class MainActivity extends ActionBarActivity {
                 layout.setVisibility(View.VISIBLE);
             } else {
                 showPlayerTurn();
+
+                //check if it's a draw
+                boolean gameIsOver = true;
+                for(int counterState : gameState) {
+                    if (counterState == 2) {
+                        gameIsOver = false;
+                    }
+                }
+                if (gameIsOver) {
+                    gameIsActive = false;
+
+                    TextView winnerMessage = (TextView) findViewById(R.id.winnerMessage);
+                    winnerMessage.setText("It's a tie!");
+
+                    LinearLayout layout = (LinearLayout) findViewById(R.id.playAgainLayout);
+                    layout.setVisibility(View.VISIBLE);
+                }
             }
         }
     }
@@ -94,6 +115,8 @@ public class MainActivity extends ActionBarActivity {
         }
 
         showPlayerTurn();
+
+        gameIsActive = true;
     }
 
     @Override

@@ -9,10 +9,19 @@ import android.widget.ImageView;
 
 public class MainActivity extends ActionBarActivity {
 
+    // 0 = player 1, 1 = player 2
+    int activePlayer = 0;
+
     public void dropIn(View view) {
         ImageView counter = (ImageView) view;
         counter.setTranslationY(-1000f);
-        counter.setImageResource(R.drawable.pug);
+        if (activePlayer == 0) {
+            counter.setImageResource(R.drawable.ana);
+            activePlayer = 1;
+        } else {
+            counter.setImageResource(R.drawable.pug);
+            activePlayer = 0;
+        }
         counter.animate().translationYBy(1000f).rotation(360f).setDuration(300);
     }
 

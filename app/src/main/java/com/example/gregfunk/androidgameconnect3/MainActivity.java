@@ -28,6 +28,12 @@ public class MainActivity extends ActionBarActivity {
         {2,4,6}
     };
 
+    public void showPlayerTurn() {
+        TextView playerTurnText = (TextView) findViewById(R.id.playerTurnText);
+        playerTurnText.setText("Player " + (activePlayer + 1) + "'s turn");
+
+    }
+
     public void dropIn(View view) {
         ImageView counter = (ImageView) view;
 
@@ -47,16 +53,22 @@ public class MainActivity extends ActionBarActivity {
             counter.animate().translationYBy(1000f).rotation(360f).setDuration(300);
 
             //check if player won
+            int winner = 2;  // 2 == no one
             for(int[] winningPosition : winningPositions) {
                 if (gameState[winningPosition[0]] == gameState[winningPosition[1]] &&
                         gameState[winningPosition[1]] == gameState[winningPosition[2]] &&
                         gameState[winningPosition[0]] != 2) {
-                    TextView winnerMessage = (TextView) findViewById(R.id.winnerMessage);
-                    winnerMessage.setText("Player " + (gameState[winningPosition[0]] + 1) + " wins!");
-
-                    LinearLayout layout = (LinearLayout) findViewById(R.id.playAgainLayout);
-                    layout.setVisibility(View.VISIBLE);
+                    winner = gameState[winningPosition[0]];
                 }
+            }
+            if (winner < 2) {
+                TextView winnerMessage = (TextView) findViewById(R.id.winnerMessage);
+                winnerMessage.setText("Player " + (winner + 1) + " wins!");
+
+                LinearLayout layout = (LinearLayout) findViewById(R.id.playAgainLayout);
+                layout.setVisibility(View.VISIBLE);
+            } else {
+                showPlayerTurn();
             }
         }
     }
@@ -65,6 +77,8 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        showPlayerTurn();
     }
 
     @Override

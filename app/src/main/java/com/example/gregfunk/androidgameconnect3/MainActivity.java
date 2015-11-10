@@ -47,10 +47,10 @@ public class MainActivity extends ActionBarActivity {
 
             counter.setTranslationY(-1000f);
             if (activePlayer == 0) {
-                counter.setImageResource(R.drawable.ana);
+                counter.setImageResource(R.drawable.greg);
                 activePlayer = 1;
             } else {
-                counter.setImageResource(R.drawable.pug);
+                counter.setImageResource(R.drawable.niki);
                 activePlayer = 0;
             }
             counter.animate().translationYBy(1000f).rotation(360f).setDuration(300);

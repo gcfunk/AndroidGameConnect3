@@ -6,6 +6,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -14,6 +16,17 @@ public class MainActivity extends ActionBarActivity {
 
     // 2 = unplayed
     int[] gameState = {2, 2, 2, 2, 2, 2, 2, 2, 2};
+
+    int[][] winningPositions = {
+        {0,1,2},
+        {3,4,5},
+        {6,7,8},
+        {0,3,6},
+        {1,4,7},
+        {2,5,8},
+        {0,4,8},
+        {2,4,6}
+    };
 
     public void dropIn(View view) {
         ImageView counter = (ImageView) view;
@@ -32,6 +45,19 @@ public class MainActivity extends ActionBarActivity {
                 activePlayer = 0;
             }
             counter.animate().translationYBy(1000f).rotation(360f).setDuration(300);
+
+            //check if player won
+            for(int[] winningPosition : winningPositions) {
+                if (gameState[winningPosition[0]] == gameState[winningPosition[1]] &&
+                        gameState[winningPosition[1]] == gameState[winningPosition[2]] &&
+                        gameState[winningPosition[0]] != 2) {
+                    TextView winnerMessage = (TextView) findViewById(R.id.winnerMessage);
+                    winnerMessage.setText("Player " + (gameState[winningPosition[0]] + 1) + " wins!");
+
+                    LinearLayout layout = (LinearLayout) findViewById(R.id.playAgainLayout);
+                    layout.setVisibility(View.VISIBLE);
+                }
+            }
         }
     }
 

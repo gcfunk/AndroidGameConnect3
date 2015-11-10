@@ -13,7 +13,8 @@
         android:layout_centerHorizontal="true"
         android:columnCount="3"
         android:rowCount="3"
-        android:background="@drawable/board">
+        android:background="@drawable/board"
+        android:id="@+id/gridLayout">
 
         <ImageView
             android:layout_width="90dp"
@@ -116,4 +117,32 @@
             android:tag="8" />
 
     </GridLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="#09b025"
+        android:padding="40dp"
+        android:id="@+id/playAgainLayout"
+        android:visibility="invisible">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/winnerMessage"
+            android:layout_gravity="center_horizontal"
+            android:textSize="30sp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Play Again"
+            android:id="@+id/playAgainButton"
+            android:layout_gravity="center_horizontal"
+            android:onClick="playAgain" />
+    </LinearLayout>
 </RelativeLayout>

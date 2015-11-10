@@ -5,6 +5,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -71,6 +72,28 @@ public class MainActivity extends ActionBarActivity {
                 showPlayerTurn();
             }
         }
+    }
+
+    public void playAgain(View view) {
+        LinearLayout layout = (LinearLayout) findViewById(R.id.playAgainLayout);
+        layout.setVisibility(View.INVISIBLE);
+
+        // 0 = player 1, 1 = player 2
+        activePlayer = 0;
+
+        // 2 = unplayed
+        for (int i=0; i < gameState.length; i++) {
+            gameState[i] = 2;
+        }
+
+        // remove tiles from all slots
+        GridLayout gridLayout = (GridLayout) findViewById(R.id.gridLayout);
+        for (int i=0; i < gridLayout.getChildCount(); i++) {
+            ImageView slot = (ImageView) gridLayout.getChildAt(i);
+            slot.setImageResource(0);
+        }
+
+        showPlayerTurn();
     }
 
     @Override

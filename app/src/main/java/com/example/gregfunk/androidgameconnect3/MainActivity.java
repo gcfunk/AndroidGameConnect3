@@ -5,9 +5,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity {
@@ -108,9 +108,9 @@ public class MainActivity extends ActionBarActivity {
         }
 
         // remove tiles from all slots
-        GridLayout gridLayout = (GridLayout) findViewById(R.id.gridLayout);
-        for (int i=0; i < gridLayout.getChildCount(); i++) {
-            ImageView slot = (ImageView) gridLayout.getChildAt(i);
+        RelativeLayout gameBoard = (RelativeLayout) findViewById(R.id.gameBoard);
+        for (int i=0; i < gameBoard.getChildCount(); i++) {
+            ImageView slot = (ImageView) gameBoard.getChildAt(i);
             slot.setImageResource(0);
         }
 
